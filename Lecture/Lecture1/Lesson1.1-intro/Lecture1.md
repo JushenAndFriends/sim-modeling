@@ -1,4 +1,6 @@
-# Introduction to Data Science Part1.1: Intro
+# 数据科学介绍1.1： 课程简介
+
+## Introduction to Data Science Part1.1: Intro
 
 >写在前面，我做别字挺多的，没有钱请人proof，希望大家看得时候，发挥想象力，脑部掉这些错别字。不过也许大家学习完这个课程以后就可以写一个模型自动纠正做别字了。
 
@@ -26,12 +28,18 @@
 
 Matlab大家都有吧，需要除了基本Matlab还需要大家装一些工具箱，如Curve fiting， statistic and machine learning这些，这些装起来估计也不便宜。
 
-人后是我我们要学习哪些内容：
+一下是我们这个课程单元要学习哪些内容：
 1. 简单的回归模型
 2. 简单时间序列的回归模型
 3. 分类模型
 4. 聚类模型
 5. 人工神经网络
+
+这里给他加一些提示：
+1. 我们后面讲的MATLAB编程的内容，都是比较基本的操作，给大家一个概念上的认识，那些函数更加复杂的操作可以把光标停留在函数上，按 <kbd>F1</kbd> 来看到他的帮助
+2. 然后其中用到了一些工具箱，这些工具箱的更多使用方法可以参考他的文档。更重要的时，他的文档中也提供了很多例子和原理的介绍，十分推荐大家看看： 
+1. [Curve Fitting Toolbox](https://www.mathworks.com/help/curvefit/)
+2. [Statistics and Machine Learning Toolbox](https://www.mathworks.com/help/stats/)
 
 ok any way let's get started.
 
