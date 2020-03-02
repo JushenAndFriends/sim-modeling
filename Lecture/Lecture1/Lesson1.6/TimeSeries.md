@@ -66,6 +66,57 @@ hold off
 然后我们调用estimate来fit我们的模型。我这里要吐个槽，matlab不同工具箱，差不多的东西风格差异很大，这好蠢。我们用1-90填的数据来预测，再用forecast来预测，我们直接预测之后15天的股价走势。看看预测的还是挺准的。这个forecast返回两个东西，一个是预测值，实际上是一个期望值，还有一个是这个期望值对应的variance，然后你可以通过*1.96得到95%的置信区间，就是这个模型给出的分布，95%的概率在这+-1.96 * variance范围内。  
 ![](2020-02-16-03-25-39.png)
 
+## VARM 模型 Vector Autoregression Models
+
+各个讲的那个ARIMA模型，它适用的时单个变量的数据，有时候一个时间序列它包含了多个变脸怎么办呢？
+
+例如下面这个例子：
+>exp8: 他给出了一个风力发电厂几年来每10分钟一次的数据，包括风速风向、理论课发电量和实际发电量，4个变量。假设我们想预测实际发电量，实际上另外3个变量对他也是有用的，实际上预测某一个变量，其他的可能都用得上。其实和之前的auto regression模型基本上没区别是不过换成了向量，协议这种叫Vector auto regression（VAR），公式和之前是一样的，就是认为Y，和参数都是向量就行：
+
+$$
+Y=C+\sum_{i=1}^{p}\Beta_i*L^iY+\Epsilon
+$$
+
+我们再matlab里面用下免得代码建立一个VAR模型
+```matlab
+model=varm(4,lag)
+```
+当我们fit了这个模型以后，会发现它给除了下面的参数：
+```matlab
+model = 
+  varm - 属性:
+
+     Description: "4-Dimensional VAR(20) Model"
+     SeriesNames: "Y1"  "Y2"  "Y3"  ... and 1 more
+       NumSeries: 4
+               P: 20
+        Constant: [4×1 vector of NaNs]
+              AR: {4×4 matrices of NaNs} at lags [1 2 3 ... and 17 more]
+           Trend: [4×1 vector of zeros]
+            Beta: [4×0 matrix]
+      Covariance: [4×4 matrix of NaNs]
+```
+
+我们的公式就是：
+
+$$
+\hat{Y}=C+\sum_{i=1}^{p}AR_i*L^iY+ \sum_{i=1}^{p}\Beta_i*L^iX+\delta*T
+$$
+
+C就是Constant，AR时几个n*n的矩阵，n就是Y的元素个数，B和AR差不多，他是X的参数，X时外因变量，就是会影响Y但是我们不预测他，T时一个trend，是一个趋
+势，就是一段平均值。
+
+更多的可以参考：
+https://www.mathworks.com/help/econ/model-specification-structures.html#bswxr8u-19
+
+https://www.mathworks.com/help/econ/introduction-to-vector-autoregressive-var-models.html#bswxr8u-2
+
+这里给大家不吱个课堂作业，就是上面这个立体我没有给出完整的解答，大家可以尝试做一下，预测效果有限，大家可以尝试不同的玩法，看看谁的准。有一个提示，就是VAR这种模型是线性的，属于很简单的模型，这里提供的数据是远远超过了这个模型需要的。
+
+下面是我预测的风速：
+
+![](2020-03-02-18-27-35.png)
+
 ## 总结
 
 ok各种简单的回归我们都学完了总结一下：
@@ -74,3 +125,4 @@ ok各种简单的回归我们都学完了总结一下：
 3. 然后调用fit函数fit你的样本，得到一个模型。
 4. 看看模型的adjrsqure，plot出来残差图，没啥问题的话就ok了。
 5. 用模型的predict方法来预测吧。
+
