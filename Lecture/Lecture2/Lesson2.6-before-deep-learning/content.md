@@ -2,7 +2,7 @@
 <!-- keywords:分类;机器学习;讲义;深度学习;Matlab;Feature engineering; -->
 <!-- description:这里讲了什么是深度学习，什么是神经网络。但是在我们开始真正的深度学习之前我们线在处理一个问题，这个问题如果用深度学习很简单就可以解决，但是在那之前，我们先尝试一下如果不用深度学习，我们要怎么搞？这里给他加较少一个新概念：feature engineering -->
 
-# 数据科学入门2.6 深度学习开始之前
+# 数据科学入门2.6 深度学习开始之前-Feature engineering
 
 这一课是optional的，可以补上，主要目的是让大家有个对比，如果一个问题不用深度学习要怎么解决。再传统机器学习经历的基础上，你再去看深度学习会更加清楚他的意义和特点。
 
@@ -10,7 +10,7 @@
 
 我们首先玩一个手写字母识别的例子，这个不是我做的，这个是matlab machine learning onramp里面的交材，在附件里面有。我觉得做的挺好的，比deep learning onramp好1000倍。
 
-这个手写字符并不是图像，而实手下班级里下来的笔迹。就是一个时间一个x，y坐标连起来就是一个字。我们首先要把这些笔迹读取进来，然后对每个笔迹生成一些特征，在用这些特种用一些分类算法比如KNN，SVM来判断他是那个字。
+这个手写字符并不是图像，而是手写板里存下来的笔迹。就是一个时间一个x，y坐标连起来就是一个字。我们首先要把这些笔迹读取进来，然后对每个笔迹生成一些特征，在用这些特种用一些分类算法比如KNN，SVM来判断他是那个字。
 
 ## 代码解释
 
@@ -83,7 +83,7 @@ feat = [range(letter.Y)/range(letter.X),...                             % 这个
     mad(letter.X), mad(letter.Y),...                                    % 这个字，上下左右片那一边
     mean(letter.dXdT,"omitnan"),mad(letter.dXdT),...                    % 笔迹导数的平均值和中位值，变现了这个字母在不同方向是是比较平缓还是比陡
     mean(letter.dYdT,"omitnan"),mad(letter.dYdT),...                    %   for X' & Y'
-    c(1,2:end),c(2,3:end),c(3,4:end),c(4,end),...                       % 之前短相关放到这里来
+    c(1,2:end),c(2,3:end),c(3,4:end),c(4,end),...                       % 之前的相关放到这里来
     nnz(islocalmin(letter.X,"MinProminence",mp)),...                    % 找到x，y的，还有dx，dy的局部最大最小值
     nnz(islocalmax(letter.X,"MinProminence",mp)),...                    %   min/max for X & Y
     nnz(islocalmin(letter.Y,"MinProminence",mp)),...
