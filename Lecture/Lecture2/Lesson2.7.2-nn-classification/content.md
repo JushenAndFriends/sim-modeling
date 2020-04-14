@@ -33,6 +33,8 @@
 
 这个和mnist比最大的不同，他不是用一个字母的图片来识别，而是用一个写这个子的trace就是轨迹。应为一个字写在图像上，有痕迹的部分不多，大部分是白纸，这样的话可以认为一个字符是一个稀疏矩阵表示的。我这个方法就是用一个稀疏矩阵去做的特征。
 
+**具体的代码** 请参考：[Train your first neural network: basic classification](https://www.limfx.pro/ReadArticle/314/train-your-first-neural-network-basic-classification)
+
 ## 课程代码
 
 https://github.com/JushenAndFriends/sim-modeling
